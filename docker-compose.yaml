@@ -6,13 +6,13 @@ services:
     volumes:
       - ./litellm_config.yaml:/app/config.yaml
     environment:
-      LITELLM_MASTER_KEY: sk-1234
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY}
       GEMINI_API_KEY_1: ${GEMINI_API_KEY_1}
       GEMINI_API_KEY_2: ${GEMINI_API_KEY_2}
       GEMINI_API_KEY_3: ${GEMINI_API_KEY_3}
       GEMINI_API_KEY_4: ${GEMINI_API_KEY_4}
       GEMINI_API_KEY_5: ${GEMINI_API_KEY_5}
-      GEMINI_MODEL_NAME: gemini/gemini-1.5-pro
+      GEMINI_MODEL_NAME: ${GEMINI_MODEL_NAME}
     ports:
       - "4000:4000"
-    command: --model gemini/gemini-1.5-pro --config /app/config.yaml --detailed_debug
+    command: --model ${GEMINI_MODEL_NAME} --config /app/config.yaml --detailed_debug
