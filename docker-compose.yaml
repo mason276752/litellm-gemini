@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  app:
+    image: litellm/litellm:v1.69.0-stable
+    platform: linux/amd64
+    volumes:
+      - ./litellm_config.yaml:/app/config.yaml
+    environment:
+      LITELLM_MASTER_KEY: sk-1234
+      GEMINI_API_KEY_1: ${GEMINI_API_KEY_1}
+      GEMINI_API_KEY_2: ${GEMINI_API_KEY_2}
+      GEMINI_API_KEY_3: ${GEMINI_API_KEY_3}
+      GEMINI_API_KEY_4: ${GEMINI_API_KEY_4}
+      GEMINI_API_KEY_5: ${GEMINI_API_KEY_5}
+      GEMINI_MODEL_NAME: gemini/gemini-1.5-pro
+    ports:
+      - "4000:4000"
+    command: --model gemini/gemini-1.5-pro --config /app/config.yaml --detailed_debug
