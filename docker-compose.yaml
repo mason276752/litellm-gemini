@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  app:
+  litellm:
     image: litellm/litellm:v1.69.0-stable
     platform: linux/amd64
     volumes:
@@ -13,6 +13,18 @@ services:
       GEMINI_API_KEY_4: ${GEMINI_API_KEY_4}
       GEMINI_API_KEY_5: ${GEMINI_API_KEY_5}
       GEMINI_MODEL_NAME: ${GEMINI_MODEL_NAME}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_PORT: ${REDIS_PORT}
     ports:
       - "4000:4000"
     command: --model ${GEMINI_MODEL_NAME} --config /app/config.yaml --detailed_debug
+    depends_on:
+      - redis
+  redis:
+    image: redis:latest
+    ports:
+      - ${REDIS_PORT}:6379
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
