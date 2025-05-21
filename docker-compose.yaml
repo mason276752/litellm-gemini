@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   litellm:
-    image: litellm/litellm:v1.69.0-stable
+    image: litellm/litellm:v1.70.1-stable
     platform: linux/amd64
     volumes:
       - ./litellm_config.yaml:/app/config.yaml
